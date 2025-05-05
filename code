@@ -1,0 +1,25 @@
+import random
+
+input_file = 'input_massiv.txt'
+output_file = 'output_massiv.txt'
+
+n = 10
+m = 5
+
+A = [[random.randint(1, 10) for _ in range(m)] for _ in range(n)]
+
+with open(input_file, 'w') as file:
+    for row in A:
+        file.write(' '.join(map(str, row)) + '\n')
+
+total_sum = 0
+with open(input_file, 'r') as file:
+    with open(output_file, 'w') as output:
+        for line in file:
+            numbers = list(map(int, line.split()))
+            filtered_numbers = [num for num in numbers if num > 5]
+            if filtered_numbers:
+                output.write(' '.join(map(str, filtered_numbers)) + '\n')
+                total_sum += sum(filtered_numbers)
+
+print(f"X > 5 şərtinə uyğun ədədlərin cəmi: {total_sum}")
